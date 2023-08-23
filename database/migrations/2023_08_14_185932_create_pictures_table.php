@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        /**
+         * appartient 1 question
+         * appartient 1 pictureType
+         */
+        Schema::create('pictures', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+
+            $table->string('picture')->comment('The picture path using storage strategy');
+            $table->string('comment')->nullable()->comment('A small comment of the picture');
+
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pictures');
     }
 };

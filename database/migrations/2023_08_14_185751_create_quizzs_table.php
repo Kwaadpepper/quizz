@@ -13,13 +13,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        /**
+         * appartient a 1 game_mode
+         * possede 1-N Team
+         * possede 1-N question
+         */
+        Schema::create('quizzs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+
+            $table->string('name')->comment('Quizz name eg: quizz of 2023-04-23');
+
+            $table->boolean('completed')->comment('The quizz has been completed');
+
             $table->timestamps();
         });
     }
@@ -31,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('quizzs');
     }
 };
