@@ -1,3 +1,4 @@
+import basicSsl from "@vitejs/plugin-basic-ssl";
 import react from "@vitejs/plugin-react";
 import laravel from "laravel-vite-plugin";
 import path from "path";
@@ -33,6 +34,7 @@ export default defineConfig({
         },
     },
     plugins: [
+        basicSsl(),
         checker({
             typescript: {
                 root: ".",
