@@ -1,0 +1,94 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-width: 2px;
+    border-color: #000;
+    background-color: #2d2d2d;
+    border-radius: 5px;
+    color: #faebd7;
+    font-size: 20px;
+    outline: none;
+    transition: linear 50ms;
+}
+
+.button:hover {
+    background-color: #1d1d1d;
+}
+
+.button:not(:disabled) {
+    cursor: pointer;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+}
+
+.anim-button:active:not(:disabled) {
+    transform: translateY(5%);
+}
+
+.light-button {
+    background-color: #faebd7;
+    color: #000;
+}
+
+.light-button:hover {
+    background-color: #fff;
+}
+
+.information {
+    border-color: #786400;
+    color: #a68900;
+}
+
+.confirmation {
+    border-color: #005f07;
+    color: #009d0a;
+}
+
+.error {
+    border-color: #6c0705;
+    color: #91100e;
+}
+
+.primary {
+    border-color: #193878;
+    background-color: #2b4e91;
+    color: #faebd7;
+}
+
+.primary:hover {
+    background-color: #1f4582;
+}
+
+.primary.information {
+    border-color: #786400;
+    background-color: #a68900;
+    color: #faebd7;
+}
+
+.primary.information:hover {
+    background-color: #937a01;
+}
+
+.primary.confirmation {
+    border-color: #005f07;
+    background-color: #009d0a;
+    color: #faebd7;
+}
+
+.primary.confirmation:hover {
+    background-color: #007f09;
+}
+
+.primary.error {
+    border-color: #6c0705;
+    background-color: #91100e;
+    color: #faebd7;
+}
+
+.primary.error:hover {
+    background-color: #7d0b09;
+}

@@ -14,9 +14,7 @@
         "**/vendor/*.sass",
         "**/vendor/**/*.sass",
         "**/vendor/*.less",
-        "**/vendor/**/*.less",
-        "**/vendor/*.vue",
-        "**/vendor/**/*.vue"
+        "**/vendor/**/*.less"
     ],
     "customSyntax": "postcss-scss",
     "rules": {

@@ -1,0 +1,41 @@
+.nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-color: rgb(111 111 111 / 0%);
+    border-bottom-width: 2px;
+    background-color: transparent;
+    border-radius: 5px;
+    color: #faebd7;
+    font-size: 20px;
+}
+
+.nav-button-light {
+    color: #111;
+}
+
+.nav-button-anim {
+    transition: linear 0.5s;
+}
+
+.nav-button-anim:active {
+    transition: linear 50ms;
+}
+
+.nav-button:hover {
+    border-color: #a5a5a5;
+}
+
+.nav-button:not(:disabled) {
+    cursor: pointer;
+}
+
+.nav-button:hover:disabled {
+    border-color: #8b0000;
+    cursor: not-allowed;
+}
+
+.nav-button:active:not(:disabled) {
+    transform: translateY(5%);
+}
