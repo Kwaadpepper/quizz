@@ -1,10 +1,7 @@
 import React from "react";
-import { ILangOptionsProps } from "../Controls/LangOptions/ILangOptions";
 import { GlobalProps } from "../IMainComponent";
 
 export interface IHeaderProps extends GlobalProps {
-    strings: HeaderLang;
-    langProps: ILangOptionsProps;
     fixed?: boolean;
     children?: React.ReactNode | React.ReactNode[];
 }

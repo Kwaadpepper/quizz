@@ -1,7 +1,5 @@
-import { TestLang } from "../Lang";
-
 export interface ITestProps {
-    strings: TestLang;
+    toto: string;
 }
 export interface ITestStates {
     toto: string;

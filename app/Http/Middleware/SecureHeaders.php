@@ -60,6 +60,7 @@ class SecureHeaders
             "connect-src 'self' " . implode(' ', [
                 // * VITE DEV
                 config('app.debug') ? "wss://vite.{$host}:4443" : '',
+                config('app.debug') ? "https://vite.{$host}:4443" : '',
                 'https://widget.mondialrelay.com',
                 'https://www.sandbox.paypal.com',
                 'https://www.paypal.com',

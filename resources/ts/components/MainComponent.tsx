@@ -2,7 +2,6 @@ import axios from "axios";
 import * as React from "react";
 import ControlExemple from "./ControlExemple/ControlExemple";
 import Button from "./Controls/Button/Button";
-import { ILangOptionsProps } from "./Controls/LangOptions/ILangOptions";
 import Header from "./Header/Header";
 import NavButton from "./Header/Nav/NavButton/NavButton";
 import {
@@ -14,7 +13,6 @@ import {
     Page,
     Profile,
 } from "./IMainComponent";
-import { IMainLangFile } from "./Lang";
 import styles from "./MainComponent.module.scss";
 
 export default class MainComponent extends React.Component<IMainComponentProps, IMainComponentStates> {
@@ -24,9 +22,9 @@ export default class MainComponent extends React.Component<IMainComponentProps, 
             user: undefined,
             bearerToken: "",
             auth: false,
-            locale: this.initLanguage(),
             page: Page.ControlExemple,
         };
+        this.initLanguage();
         this.setLanguage = this.setLanguage.bind(this);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
@@ -40,12 +38,9 @@ export default class MainComponent extends React.Component<IMainComponentProps, 
         this.rememberLogin();
     }
     public render(): React.ReactElement {
-        const { locale, auth, user, page } = this.state;
-        const selectedLanguageFile: IMainLangFile = this.getLanguage();
-        const strings = selectedLanguageFile.MainComponent; //He is the only one to not have props strings since he is the one who handle it
+        const { auth, user, page } = this.state;
 
         const global: GlobalProps = {
-            lang: selectedLanguageFile,
             user: user,
             auth: auth,
             loginF: this.login,
@@ -53,37 +48,24 @@ export default class MainComponent extends React.Component<IMainComponentProps, 
             registerF: this.register,
             changePage: this.changePage,
         };
-        const langProps: ILangOptionsProps = {
-            availableLanguages: ["fr", "en"],
-            selectedLocale: locale,
-            changeSelectedLocale: this.setLanguage,
-        };
         switch (page) {
             default:
                 return (
                     <div className={styles.main}>
-                        <Header strings={selectedLanguageFile.Header} langProps={langProps} fixed={true} {...global} />
-                        <p>{strings.Hello}</p>
+                        <Header fixed={true} {...global} />
+                        <p>coucou</p>
                         <Button onClick={() => this.changePage(Page.ControlExemple)}>Control Exemple</Button>
                     </div>
                 );
             case Page.ControlExemple:
                 return (
                     <div className={styles.main}>
-                        <Header strings={selectedLanguageFile.Header} langProps={langProps} fixed={true} {...global}>
+                        <Header fixed={true} {...global}>
                             <NavButton onClick={() => this.changePage(Page.Main)}> Return to main page </NavButton>
                         </Header>
-                        <ControlExemple langProps={langProps} {...global} />
+                        <ControlExemple {...global} />
                     </div>
                 );
-        }
-    }
-    private getLanguage(): IMainLangFile {
-        switch (this.state.locale) {
-            case "en":
-                return this.props.lang.en as IMainLangFile;
-            default:
-                return this.props.lang.fr as IMainLangFile;
         }
     }
     public getCookie(cookieName: string): string | undefined {
@@ -115,8 +97,8 @@ export default class MainComponent extends React.Component<IMainComponentProps, 
             return "fr";
         }
     }
-    public setLanguage(locale: string): void {
-        this.setState({ locale: locale }, () => this.setCookie("currentLocale", this.state.locale, 30));
+    public setLanguage(): void {
+        this.setCookie("currentLocale", "fr", 30);
     }
     public rememberLogin(): void {
         const token = this.getCookie("bearerToken");

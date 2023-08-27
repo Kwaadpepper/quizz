@@ -128,7 +128,7 @@ export default class ControlExemple extends React.Component<IControlExempleProps
                             <div>
                                 <h2>TextBox</h2>
                                 <div>
-                                    <TextBoxExemple toto="sdsd" />
+                                    <TextBoxExemple toto='sdsd' />
                                 </div>
                             </div>
                         </>
