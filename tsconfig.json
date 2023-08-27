@@ -1,33 +1,28 @@
 {
+    "sourceMap": true,
     "compilerOptions": {
-        "target": "es6",
-        "lib": ["es6", "es2021", "dom", "dom.iterable"],
+        "target": "esnext",
+        "lib": ["es5", "es6", "es2021", "dom", "dom.iterable"],
         "module": "esnext",
         "strict": true,
+        "jsx": "preserve",
         "moduleResolution": "node",
-
-        "sourceRoot": "resources/ts/",
-        "typeRoots": ["resources/ts/@types", "node_modules/@types"],
+        "typeRoots": [
+            "resources/ts/@types",
+            "node_modules/@types"
+        ],
+        "types": ["vite/client"],
         "baseUrl": ".",
         "paths": {
-            "~/*": ["node_modules/*", "node_modules/@types/*"],
-            "@/*": ["resources/assets/*"]
-        },
-
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true,
-        "jsx": "react",
-        "declaration": true,
-        "sourceMap": true,
-        "experimentalDecorators": true,
-        "skipLibCheck": true,
-        "outDir": "public/build",
-        "inlineSources": false,
-        "strictNullChecks": false,
-        "noUnusedLocals": false,
-        "resolveJsonModule": true
+            "~/*": [
+                "node_modules/*",
+                "node_modules/@types/*",
+            ],
+            "@/*": ["resources/assets/*"],
+        }
     },
-    "include": ["resources/**/*.js", "resources/**/*.ts", "resources/**/*.tsx"],
-    "exclude": ["node_modules", "resources/lib"]
+    "include": ["resources/**/*.js", "resources/**/*.ts", "resources/**/*.vue"],
+    "exclude": ["node_modules"],
+    "compileOnSave": false,
+    "experimentalDecorators": true
 }

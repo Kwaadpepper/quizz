@@ -5,38 +5,46 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
+        "plugin:vue/vue3-strongly-recommended",
+        "@vue/eslint-config-typescript"
     ],
-    "parser": "@typescript-eslint/parser",
+    "overrides": [
+        {
+        "files": ["*.ts", "*.vue"],
+        "rules": {
+            "no-undef": "off"
+        }
+        },
+        {
+        "files": ["*.vue"],
+        "rules": {
+            "indent": "off"
+        }
+        }
+    ],
+    "parser": "vue-eslint-parser",
     "parserOptions": {
         "parser": "@typescript-eslint/parser",
-        "ecmaFeatures": {
-            "jsx": true
-        },
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint"],
+    "plugins": ["vue", "@typescript-eslint"],
     "ignorePatterns": ["webpack.mix.js", "**/vendor/*.js", "**/vendor/**/*.js"],
     "rules": {
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "double", { "avoidEscape": true }],
-        "semi": ["error", "always"]
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+        "vue/script-indent": ["error", 2, { "baseIndent": 0, "switchCase": 1 }],
+        "vue/one-component-per-file": "off"
     },
     "settings": {
-        "shouldFix": true,
-        "react": {
-            "version": "detect"
-        },
         "import/resolver": {
             "node": {
-                "extensions": [".js", ".tsx", ".ts", ".d.ts"]
+                "extensions": [".js", ".vue", ".ts", ".d.ts"]
             },
             "alias": {
-                "extensions": [".tsx", ".js", ".ts", ".scss", ".d.ts"],
+                "extensions": [".vue", ".js", ".ts", ".scss", ".d.ts"],
                 "map": [
                     ["~", "./resources/assets"],
                     ["@", "./node_modules"]

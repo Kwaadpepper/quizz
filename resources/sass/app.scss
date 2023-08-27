@@ -1,8 +1,6 @@
-// Fonts
-@import "https://fonts.bunny.net/css?family=Nunito";
+// BASE.
+@import "./base/common";
 
-// Variables
-@import "variables";
-
-// Bootstrap
-@import "bootstrap/scss/bootstrap";
+// LIBS.
+@import "./vendor/bootstrap";
+@import "~/glightbox/dist/css/glightbox.css";
