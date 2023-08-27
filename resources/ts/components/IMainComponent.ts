@@ -1,7 +1,10 @@
+import { IMainLangFile, Lang } from "./Lang";
+
 export interface IMainComponentProps {
-    toto: string;
+    lang: Lang;
 }
 export interface IMainComponentStates {
+    locale: string;
     auth: boolean;
     bearerToken: string;
     user: Profile;
@@ -27,6 +30,7 @@ export interface Profile {
     token: string;
 }
 export interface GlobalProps {
+    lang: IMainLangFile;
     user: Profile;
     auth: boolean;
     loginF: (credential: string, password: string) => void;

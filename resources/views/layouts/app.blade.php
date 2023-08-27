@@ -15,8 +15,6 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @include('modules.script-constants')
-    @include('modules.script-routes')
     @viteReactRefresh
     @vite(['resources/sass/app.scss', 'resources/ts/app.tsx'])
 </head>
@@ -25,6 +23,8 @@
     <main class="py-4">
         @yield('content')
     </main>
+    @include('modules.script-constants')
+    @include('modules.script-routes')
     @stack('scripts')
 </body>
 
