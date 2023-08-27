@@ -23,9 +23,6 @@
     <main class="py-4">
         @yield('content')
     </main>
-    @include('modules.script-constants')
-    @include('modules.script-routes')
-    @stack('scripts')
 </body>
 
 </html>
