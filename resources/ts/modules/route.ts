@@ -1,78 +1,78 @@
 const route = {
     methods: {
         /**
-         * Define a route by the data given,
-         * ex: route('name', { 'parameter': 'value' }).
+         * Same behavior as laravel route
+         *
+         * ! window.__SYSTEM._routes has to be defined
+         *
+         * @param routeName The route name.
+         * @param parameters Parameters, if a parameter name matches a route path level,
+         * it will be replaced, otherwise it will appear in query.
+         * @param keepActualQueries Pass this to keep current url queries.
+         * @param keepActualHashes Pass this to keep current url fragments
+         * @returns The newly formated string
          */
         route(
             routeName: string,
-            parameters: Record<string, string | number> = {}
+            parameters: Record<string, string | number | Array<string | number>> = {},
+            keepActualQueries = false,
+            keepActualHashes = false,
         ): string | null {
             const routes = route.flattenProperties(window.__SYSTEM._routes);
-            const routeUrl =
-                Object.keys(routes).indexOf(routeName) !== -1
-                    ? (routes[routeName] as string)
-                    : null;
+            const routeUrl = Object.keys(routes).indexOf(routeName) !== -1 ? (routes[routeName] as string) : null;
+
+            // * Return null if route url could not be found
             if (!routeUrl) {
-                return routeUrl;
+                return null;
             }
-            // copy parameters
-            const iParameters = Object.assign({}, parameters),
-                origin = window.location.origin,
+
+            const queryParameters: Record<string, number | string> = {},
+                url = new URL(window.location.origin),
+                searchParams = new URL(String(window.location)).searchParams,
                 hash = window.location.hash;
-            let pathname = routeUrl.replace(origin, ""),
-                search = window.location.search;
+            let pathname = routeUrl.replace(origin, "");
 
-            // Replace in path name.
-            for (const paramName in iParameters) {
-                const paramValue = parameters[paramName];
-                if (pathname.indexOf(paramName) !== -1) {
-                    pathname = pathname.replace(
-                        paramName,
-                        paramValue as string
-                    );
-                }
-                delete parameters[paramName];
-            }
-
+            // * Replace parameters in path name.
             for (const paramName in parameters) {
-                const paramValue = parameters[paramName];
-                if (search.indexOf(paramName + "=") >= 0) {
-                    const prefix = search.substring(
-                        0,
-                        search.indexOf(paramName + "=")
-                    );
-                    let suffix = search.substring(
-                        search.indexOf(paramName + "=")
-                    );
-                    suffix = suffix.substring(suffix.indexOf("=") + 1);
-                    suffix =
-                        suffix.indexOf("&") >= 0
-                            ? suffix.substring(suffix.indexOf("&"))
-                            : "";
-                    search = `${prefix}${paramName}=${paramValue}${suffix}`;
-                } else if (search.indexOf("?") < 0) {
-                    search += `?${paramName}=${paramValue}`;
+                const paramValue = String(parameters[paramName]);
+                if (pathname.indexOf(paramName) !== -1) {
+                    // * Replace pathname part with parameter
+                    pathname = pathname.replace(paramName, paramValue);
                 } else {
-                    search += `&${paramName}=${paramValue}`;
+                    // * push parameter to be in queries
+                    queryParameters[paramName] = paramValue;
                 }
             }
-            return `${origin}${pathname}${search}${hash}`;
+            url.pathname = pathname;
+
+            // * Build query
+            if (keepActualQueries) {
+                // * Push actual queries
+                for (const param of searchParams) {
+                    url.searchParams.set(param[0], param[1]);
+                }
+            }
+            // * Push request queries
+            for (const paramName in queryParameters) {
+                url.searchParams.set(paramName, String(queryParameters[paramName]));
+            }
+
+            if (keepActualHashes) {
+                url.hash = hash;
+            }
+
+            return String(url);
         },
     },
     flattenProperties(
         obj: Record<PropertyKey, unknown>,
         parent: string | null = null,
-        res: Record<PropertyKey, unknown> = {}
+        res: Record<PropertyKey, unknown> = {},
     ): Record<PropertyKey, unknown> {
         for (const key of Object.keys(obj)) {
             const propName = parent ? parent + "." + key : key;
             if (obj[key] instanceof Object) {
-                route.flattenProperties(
-                    obj[key] as Record<PropertyKey, unknown>,
-                    propName,
-                    res
-                );
+                route.flattenProperties(obj[key] as Record<PropertyKey, unknown>, propName, res);
             } else {
                 res[propName] = obj[key];
             }

@@ -16,7 +16,7 @@ export default {
                 translation = key
                     .split(".")
                     .reduce(
-                        (t, i) => t[i as never] ?? null,
+                        (t, i) => t[i as any] ?? null,
                         window.__SYSTEM._translations.php
                     ) as string;
                 if (translation) {
@@ -27,9 +27,8 @@ export default {
             }
 
             if (translationNotFound) {
-                translation = (window.__SYSTEM._translations.json[
-                    key as never
-                ] ?? key) as string;
+                translation = (window.__SYSTEM._translations.json[key as any] ??
+                    key) as string;
             }
             const vars = translation.match(/:[0-9A-Za-z_]+/g);
             if (vars) {

@@ -1,7 +1,7 @@
-export {};
+export { };
 
-import { AxiosStatic } from "axios";
 import type VueTagsInput from "@sipec/vue3-tags-input";
+import { AxiosStatic } from "axios";
 
 // * Recursive List<string>
 type StringList = Record<PropertyKey, string>;
@@ -38,6 +38,8 @@ declare global {
         axios: AxiosStatic;
         Swal: Function;
         __SYSTEM: {
+            _asset: string;
+            _config: NestedStringList;
             _locale: string;
             _routes: Record<string, string>;
             _translations: {
