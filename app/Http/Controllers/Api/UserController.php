@@ -3,21 +3,27 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreTeamRequest;
-use App\Http\Requests\UpdateTeamRequest;
-use App\Http\Resources\TeamResource;
-use App\Models\Team;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Resources\UserResource;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
-class TeamController extends Controller
+class UserController extends Controller
 {
+    public function getLogged()
+    {
+        return new UserResource(Auth::user());
+    }
+
+
+
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        return TeamResource::collection(Team::query()->paginate());
+        //
     }
 
     /**
@@ -31,7 +37,7 @@ class TeamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTeamRequest $request)
+    public function store(StoreCategoryRequest $request)
     {
         //
     }
@@ -39,7 +45,7 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Team $team)
+    public function show(Category $category)
     {
         //
     }
@@ -47,7 +53,7 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Team $team)
+    public function edit(Category $category)
     {
         //
     }
@@ -55,7 +61,7 @@ class TeamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTeamRequest $request, Team $team)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
     }
@@ -63,7 +69,7 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Team $team)
+    public function destroy(Category $category)
     {
         //
     }

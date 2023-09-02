@@ -9,4 +9,5 @@ Auth::routes([
     'register' => false
 ]);
 
-Route::view('/', 'home')->middleware('auth')->name('home');
+Route::view('{anyExceptRoot}', 'home')->middleware('auth')
+    ->where('anyExceptRoot', '[^/]*')->name('home');

@@ -1,4 +1,4 @@
-const route = {
+const config = {
     methods: {
         config(key: string, fallback: string|null = null): string | null {
             let config: string,
@@ -22,4 +22,4 @@ const route = {
     },
 };
 
-export default route;
+export default config;

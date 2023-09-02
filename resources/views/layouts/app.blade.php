@@ -15,13 +15,18 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+    @if (config('app.debug'))
+        <script nonce="{{ $nonce }}">
+            window.vueDebug = true;
+        </script>
+    @endif
     @include('modules.script-constants')
     @include('modules.script-routes')
     @vite(['resources/sass/app.scss', 'resources/ts/app.ts'])
 </head>
 
 <body>
-    <main class="py-4">
+    <main>
         @yield('content')
     </main>
     @stack('scripts')

@@ -1,0 +1,6 @@
+export enum MutationTypes {
+    APP_SET_LOADED = "APP_SET_LOADED",
+    APP_SET_ERROR = "APP_SET_ERROR",
+    SET_USER = "SET_USER",
+    UPDATE_BASKET = "UPDATE_BASKET",
+}

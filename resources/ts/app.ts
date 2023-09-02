@@ -7,4 +7,5 @@ import "./utilities/bootstrap";
 import "./utilities/fontawesome";
 import "./utilities/gligthbox";
 import "./utilities/sweetalert";
-import "./utilities/vue";
+import "./utilities/vue/quizzApp";
+

@@ -15,7 +15,6 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @viteReactRefresh
     @vite(['resources/sass/unauth.scss', 'resources/ts/unauth.ts'])
 </head>
 

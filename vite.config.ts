@@ -22,6 +22,12 @@ export default defineConfig({
                 assetFileNames: `assets/${
                     process.env.NODE_ENV === "local" ? "[name]-" : ""
                 }[hash].[ext]`,
+                manualChunks: {
+                    "group-user": [
+                        "./resources/ts/components/Views/Pages/DashboardPage",
+                        "./resources/ts/components/Views/Pages/Teams/TeamsIndex",
+                    ],
+                },
             },
         },
         chunkSizeWarningLimit: 700,
@@ -83,7 +89,7 @@ export default defineConfig({
         eslint({
             cache: false,
             extensions: ["js", "ts"],
-            include: "**/*.ts",
+            include: "ressources/ts/**/*.ts",
             lintOnStart: false,
             emitWarning: true,
             emitError: true,

@@ -24,7 +24,26 @@
         id="navbarSupportedContent"
       >
         <!-- Left Side Of Navbar -->
-        <ul class="navbar-nav me-auto" />
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <RouterLink
+              class="nav-link"
+              to="/"
+              role="button"
+            >
+              {{ "Dashboard" }}
+            </RouterLink>
+          </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              to="/teams"
+              role="button"
+            >
+              {{ "Équipes" }}
+            </router-link>
+          </li>
+        </ul>
 
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ms-auto">
@@ -37,9 +56,8 @@
               role="button"
               aria-haspopup="true"
               aria-expanded="false"
-              v-pre
             >
-              {{ "USername" }}
+              {{ __('Bienvenue') }} {{ loggedUserName }}
             </a>
 
             <div
@@ -61,7 +79,11 @@
                 :action="String(route('logout'))"
                 method="POST"
               >
-                @csrf
+                <input
+                  type="hidden"
+                  name="_token"
+                  :value="csrfToken"
+                >
               </form>
             </div>
           </li>
@@ -73,6 +95,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { RouterLink } from "vue-router";
 import config from "./../../../modules/config";
 import route from "./../../../modules/route";
 import trans from "./../../../modules/trans";
@@ -81,29 +104,33 @@ export default defineComponent({
   name:"HeaderLayout",
   mixins: [config, route, trans],
   components: {
+    RouterLink
   },
   beforeMount() {
-    if (!this.$attrs.json) {
-      throw new Error("this component requires json");
-    }
+
   },
   mounted() {
 
   },
   data(): {
     name: string;
+    csrfToken: string
   } {
     return {
       name: "",
+      csrfToken: String(document.querySelector("meta[name=\"csrf-token\"]")?.getAttribute("content"))
     };
   },
   methods: {
     logout() {
-      // this.$refs.logoutForm.submit();
-      // document
-      console.log(this);
+      const logoutForm = this.$refs.logoutForm as HTMLFormElement;
+      logoutForm.submit();
     }
   },
-  computed: {},
+  computed: {
+    loggedUserName(): string {
+      return this.$store.getters.getUser.name;
+    }
+  },
 });
 </script>
